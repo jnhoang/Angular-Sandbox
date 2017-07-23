@@ -1,0 +1,25 @@
+{
+  "name": "angular-sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jnhustin/Angular-Sandbox.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jnhustin/Angular-Sandbox/issues"
+  },
+  "homepage": "https://github.com/jnhustin/Angular-Sandbox#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "node": "0.0.0",
+    "path": "^0.12.7"
+  }
+}
