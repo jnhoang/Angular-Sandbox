@@ -3,6 +3,6 @@ angular
 .controller('HomeCtrl', [
   '$scope'
 , function($scope) {
-    console.log('success');
+
   }
 ]);

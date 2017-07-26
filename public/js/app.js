@@ -1,5 +1,5 @@
 angular
-.module('AngularSandbox', ['ui.router'])
+.module('AngularSandbox', ['ui.router', 'ui.bootstrap'])
 .config([
   '$stateProvider'
 , '$urlRouterProvider'
