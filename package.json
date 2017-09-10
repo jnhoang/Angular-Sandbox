@@ -1,12 +1,12 @@
 {
-  "name": "angular-sandbox",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
+  "name"        : "angular-sandbox",
+  "version"     : "1.0.0",
+  "description" : "",
+  "main"        : "index.js",
+  "scripts"     : {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
+  "repository"  : {
     "type": "git",
     "url": "git+https://github.com/jnhustin/Angular-Sandbox.git"
   },

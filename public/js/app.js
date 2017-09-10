@@ -9,9 +9,14 @@ angular
 
     $stateProvider
     .state('Home', {
-      url: '/'
-    , templateUrl: 'app/home/home.html'
-    , controller: 'HomeCtrl'
+      url          : '/'
+    , templateUrl  : 'app/components/home/home.html'
+    , controller   : 'HomeCtrl'
+    })
+    .state('Form', {
+      url          : '/form'
+    , templateUrl  : 'app/components/form/form.html'
+    , controller   : 'FormCtrl'
     })
 
     $locationProvider.html5Mode(true);

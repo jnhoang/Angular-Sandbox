@@ -1,0 +1,24 @@
+{
+  "name": "angular-sandbox",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "jnhustin <jnhustin@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jnhustin/Angular-Sandbox",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "^1.0.6",
+    "angular": "^1.6.6",
+    "angular-animate": "^1.6.6",
+    "angular-touch": "^1.6.6"
+  }
+}

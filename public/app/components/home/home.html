@@ -1,0 +1,73 @@
+<h1>Home controller</h1>
+<div class="controller">
+  <form>
+    <!-- Text Input -->
+    <div 
+      class     = "form-group"
+      ng-class  = "{ 'has-error': $invalid}">
+      <h2>Text Input</h2>
+      <label>
+        What is your name:
+        <input 
+          class   = "form-control"
+          type    = "text">
+      </label>
+    </div>
+
+    <!-- Radio Input -->
+    <div>
+      <h2>Radio Input</h2>
+      <label>
+        Male: 
+        <input 
+          name    = "gender"
+          type    = "radio"
+          value   = "male">
+      </label>
+      <label>
+        Female:
+        <input 
+          name    = "gender"
+          type    = "radio"
+          value   = "female">
+      </label>
+      <label>
+        Other:
+        <input 
+          name    = "gender"
+          type    = "radio"
+          value   = "other">
+      </label>
+    </div>
+
+    <!-- Checkbox Input -->
+    <div>
+      <h2>Checkbox Input</h2>
+      <h5>Which Company?</h5>
+      <label>
+        Xbox
+        <input 
+          name ="systems" 
+          type="checkbox" 
+          value="xbox">
+      </label>
+      <label>
+        Playstation
+        <input 
+          name ="systems" 
+          type="checkbox" 
+          value="playstation">
+      </label>
+      <label>
+        Nintendo
+        <input 
+          name ="systems" 
+          type="checkbox" 
+          value="nintendo">
+      </label>
+    </div>
+  </form>    
+
+</div>
+
+<button class="btn btn-success">test</button>
