@@ -1,5 +1,5 @@
 angular
-.module('AngularSandbox', ['ui.router', 'ui.bootstrap'])
+.module('AngularSandbox', ['ui.router', 'ui.bootstrap', AlertModule])
 .config([
   '$stateProvider'
 , '$urlRouterProvider'
@@ -10,12 +10,12 @@ angular
     $stateProvider
     .state('Home', {
       url          : '/'
-    , templateUrl  : 'app/components/home/home.html'
+    , templateUrl  : 'app/home/home.html'
     , controller   : 'HomeCtrl'
     })
     .state('Form', {
       url          : '/form'
-    , templateUrl  : 'app/components/form/form.html'
+    , templateUrl  : 'app/form/form.html'
     , controller   : 'FormCtrl'
     })
 

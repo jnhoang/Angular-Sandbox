@@ -1,8 +1,8 @@
 angular
 .module('AngularSandbox')
 .controller('HomeCtrl', [
-  '$scope'
+  '$sce'
 , function($scope) {
-
+  
   }
 ]);
