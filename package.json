@@ -1,12 +1,12 @@
 {
-  "name"        : "angular-sandbox",
-  "version"     : "1.0.0",
-  "description" : "",
-  "main"        : "index.js",
-  "scripts"     : {
+  "name": "angular-sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository"  : {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/jnhustin/Angular-Sandbox.git"
   },
@@ -19,7 +19,11 @@
   "homepage": "https://github.com/jnhustin/Angular-Sandbox#readme",
   "dependencies": {
     "express": "^4.15.3",
+    "fs": "0.0.1-security",
     "node": "0.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.10.3"
   }
 }
