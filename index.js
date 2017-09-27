@@ -7,9 +7,9 @@ var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
-
-
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 /* Controllers */
 app.use('/api/users', require('./controllers/users'));
