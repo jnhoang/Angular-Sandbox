@@ -1,11 +1,11 @@
 angular
 .module('AngularSandbox')
-.controller('HomeCtrl', [
+.controller('FormCtrl', [
   '$scope',
-  'HomeService',
-  function($scope, HomeService) {
+  'FormCtrl',
+  function($scope, FormService) {
     
-    HomeService
+    FormService
     .getAllUsers()
     .then(function(result) {
       $scope.test = result.data;
@@ -19,7 +19,7 @@ angular
   }
 ])
   
-.factory('HomeService', function($http) {
+.factory('FormService', function($http) {
   return {
     getAllUsers: getAllUsers
   };

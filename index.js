@@ -7,7 +7,7 @@ var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app')));
 
 
 
@@ -17,7 +17,7 @@ app.use('/api/users', require('./controllers/users'));
 
 /* Angular Catch */
 app.get('/*', function(req, res) {
- res.sendFile(path.join(__dirname, 'public/index.html'));
+ res.sendFile(path.join(__dirname, 'app/index.html'));
 });
 
 
