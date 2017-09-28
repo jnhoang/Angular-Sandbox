@@ -1,0 +1,41 @@
+<div class="container">
+  <div>
+    <form>
+      <div class="row form-inline">
+        <label class="col-sm-2 col-form-label">Email:</label> 
+        <input 
+          class     = "form-control"
+          ng-model  = "newUser.email"
+          type      = "email">
+      </div>
+      <div class="form-inline row">
+        <label class="col-sm-2 col-form-label">Username:</label> 
+        <input 
+          class     = "form-control"
+          ng-model  = "newUser.username"
+          type      = "text">
+      </div>
+      <div class="form-inline row">
+        <label class="col-sm-2 col-form-label">Password:</label> 
+        <input 
+          class     = "form-control"
+          ng-model  = "newUser.password"
+          type      = "password">
+      </div>
+      <div class="form-inline row">
+        <label class="col-sm-2 col-form-label">Confirm Password:</label> 
+        <input 
+          class     = "form-control"
+          ng-model  = "newUser.password2"
+          type      = "password">
+      </div>
+    </form>
+    <button 
+      class     = "btn btn-default"
+      ng-click  = "createUser()"
+      >
+      Submit
+    </button>
+  </div>
+
+</div>
