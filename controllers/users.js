@@ -79,7 +79,32 @@ router.post('/signup', function(req, res) {
 
 
 /* EDIT USER */
-// .put
+router.put('/edit/:username', function(req, res) {  
+  var username   = req.params.username;
+  var updateData = req.body;
+  var forUser    = {
+    where: { username: username }
+  };
+  var successObj = {
+    status    : 200,
+    message   : 'user, ' + username + ' has been deleted'
+  };
+  var errorObj   = {
+    status    : 404,
+    message   : 'user, '+ username + ' not found'
+  }
+  database
+  .user
+  .update(updateData, forUser)
+  .then(function(success) {
+    // success = [1]
+    res.send(success ? successObj : errorObj);
+  })
+  .catch(function(error) {
+    console.log('errrrror: ', error);
+    res.send('error');
+  })
+});
 
 
 /* DELETE USER */
