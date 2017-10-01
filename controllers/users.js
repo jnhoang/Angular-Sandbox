@@ -1,18 +1,46 @@
 var express   = require('express');
-var db        = require('../models');
+var database  = require('../models');
 
 var router    = express.Router();
 
 
+
+
+
+/* GET ALL USERS */
 router.get('/allUsers', function(req, res) {
 
-  db
+  database
   .user
   .findAll()
-  .then(function(result) {
-    res.send(result);
+  .then(function(allUsers) {
+    res.send(allUsers);
+  })
+  .catch(function(error) {
+    console.log('error in /allUsers route:', error);
+    res.send('error');
   });
+});
 
+
+/* GET SINGLE USER */
+router.get('/:username', function(req, res) {
+  console.log('******user: ', req.params.username)
+
+  var sqlParams = {
+    where: { username: req.params.username }
+  };
+
+  database
+  .user
+  .find(sqlParams)
+  .then(function(user) {
+    res.send(user);
+  })
+  .catch(function(error) {
+    console.log('issue in the get/:username route: ', error);
+    res.send('none found');
+  });
 });
 
 
@@ -20,9 +48,7 @@ router.get('/allUsers', function(req, res) {
 router.post('/signup', function(req, res) {
 
   var sqlParams = {
-    where    : {
-      username : req.body.username
-    },
+    where    : { username : req.body.username },
     defaults : {
       fname                     : req.body.fname,
       lname                     : req.body.lname,
@@ -37,17 +63,54 @@ router.post('/signup', function(req, res) {
     }
   };
 
-  db
+  database
   .user
   .findOrCreate(sqlParams)
   .then(function(userArr) {
+    // returns [ { user }, bool ]
     res.send(userArr);
   })
   .catch(function(error) {
-    console.log('error: ', error);
+    console.log('error in /signup route: ', error);
     res.send(error)
   });
 
+});
+
+
+/* EDIT USER */
+// .put
+
+
+/* DELETE USER */
+router.delete('/delete/:username', function(req, res) {
+  var username   = req.params.username;
+
+  console.log('username: ', username)
+  var sqlParams  = {
+    where: { username: username }
+  };
+  var successObj = {
+    status    : 200,
+    message   : 'user, ' + username + ' has been deleted'
+  };
+  var errorObj   = {
+    status    : 404,
+    message   : 'user, '+ username + ' not found'
+  }
+  
+  database
+  .user
+  .destroy(sqlParams)
+  .then(function(success) {
+    console.log(success);
+    success ? res.send(successObj) : res.send('user not found');
+
+  })
+  .catch(function(error) {
+    console.log('an error has occured in user /delete route', error);
+    res.send(error);
+  })
 });
 
 module.exports = router;
