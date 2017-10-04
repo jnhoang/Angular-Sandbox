@@ -1,7 +1,12 @@
 <div class = "container">
   <h1>Admin</h1>
   <!-- change this to a table -->
-  <table>
+  <button>Create New User</button>
+  <div ng-if="!users">
+    <h1>No Users Found</h1>
+  </div>
+  
+  <table ng-if="users">
     <tr>
       <th>Username</th>
       <th>Action</th>
@@ -9,7 +14,9 @@
     <tr ng-repeat="user in users">
       <td><a href="#">{{ user.username }}</a></td>
       <td>
-        <button class="btn btn-danger">
+        <button 
+          class="btn btn-danger"
+          ng-click="delete()">
           Delete
         </button>
       </td>  
