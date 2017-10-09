@@ -4,7 +4,7 @@ angular
   '$scope',
   'HomeService',
   function($scope, HomeService) {
-
+    console.log('vdl fark')
   }
 ])
 

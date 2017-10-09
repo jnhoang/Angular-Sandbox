@@ -7,7 +7,6 @@ angular
   'AuthService',
   'AlertService',
   function($scope, $window, $location, AuthService, AlertService) {
-
   function init() {
 
   }

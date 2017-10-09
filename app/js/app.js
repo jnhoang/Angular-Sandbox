@@ -25,7 +25,7 @@ angular
     })
     .state('Admin', {
       url          : '/admin',
-      templateURL  : 'components/admin/admin.html',
+      templateUrl  : 'components/admin/admin.html',
       controller   : 'AdminCtrl'
     })
 

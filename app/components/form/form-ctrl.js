@@ -2,7 +2,7 @@ angular
 .module('AngularSandbox')
 .controller('FormCtrl', [
   '$scope',
-  'FormCtrl',
+  'FormService',
   function($scope, FormService) {
     
     FormService

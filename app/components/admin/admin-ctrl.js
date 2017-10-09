@@ -9,8 +9,9 @@ angular
 
     /* scope functions */
     $scope.deleteUser = deleteUser;
+    
     init();
-
+  
 
     function init() {
       AdminFactory
@@ -19,7 +20,6 @@ angular
         $scope.users = data.data;
       });
     }
-
 
     function deleteUser() {
       AdminFactory
@@ -35,6 +35,10 @@ angular
       .catch(function error(err) {
         console.log('error: ', err);
       })
+    }
+
+    function getAllUsers() {
+      
     }
   }
 ])
