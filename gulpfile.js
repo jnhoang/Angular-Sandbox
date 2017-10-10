@@ -26,7 +26,10 @@ var config = {
     'app/components/**/*.js',
     '!app/js/**/*.min.js'
   ],
-  watchHtml       : 'app/components/**/*.html',
+  watchHtml       : [
+    'app/components/**/*.html',
+    'app/index.html'
+  ],
   watchScript     : [
     'gulpfile.js', 
     'app/js/**/*.js',
@@ -49,7 +52,7 @@ gulp.task('styles', function() {
   gulp
   .src('app/css/style.css')
   .pipe(autoprefixer(config.autoprefix))
-  .pipe(reload(config.reloadObj));
+  .pipe(reload(config.reload));
 });
 
 
@@ -68,7 +71,7 @@ gulp.task('scripts', function() {
 /* WATCH TASKS */
 gulp.task('watch', function() {
   gulp.watch(config.watchScript, ['scripts']);
-  gulp.watch(config.watchStyle , ['style'  ]);
+  gulp.watch(config.watchStyle , ['styles' ]);
   gulp.watch(config.watchHtml  , ['htmls'  ]);
 })
 
