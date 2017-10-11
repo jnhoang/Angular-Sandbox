@@ -13,19 +13,20 @@ var config = {
       baseDir: './app/'
     }
   },
-  htmlSrc         : [
-    'index.html', 
-    'app/components/**/*.html'
-  ],
   reload          : { 
     stream: true 
   },
-  scriptSrc       : [
+  srcHtml         : [
+    'index.html', 
+    'app/components/**/*.html'
+  ],
+  srcScript       : [
     'gulpfile.js', 
     'app/js/**/*.js', 
     'app/components/**/*.js',
     '!app/js/**/*.min.js'
   ],
+  srcStyle        : 'app/css/style.css',
   watchHtml       : [
     'app/components/**/*.html',
     'app/index.html'
@@ -38,10 +39,12 @@ var config = {
   watchStyle      : 'app/css/style.css'
 };
 
+
+
 /* HTML TASKS */
 gulp.task('htmls', function() {
   gulp
-  .src(config.htmlSrc)
+  .src(config.srcHtml)
   .pipe(reload(config.reload));
 });
 
@@ -50,7 +53,7 @@ gulp.task('htmls', function() {
 /* STYLE TASKS */
 gulp.task('styles', function() {
   gulp
-  .src('app/css/style.css')
+  .src(config.srcStyle)
   .pipe(autoprefixer(config.autoprefix))
   .pipe(reload(config.reload));
 });
@@ -61,7 +64,7 @@ gulp.task('styles', function() {
 /* SCRIPT TASKS */
 gulp.task('scripts', function() {
   gulp
-  .src(config.scriptSrc)
+  .src(config.srcScript)
   .pipe(reload(config.reload));
 });
 
@@ -73,7 +76,7 @@ gulp.task('watch', function() {
   gulp.watch(config.watchScript, ['scripts']);
   gulp.watch(config.watchStyle , ['styles' ]);
   gulp.watch(config.watchHtml  , ['htmls'  ]);
-})
+});
 
 
 
