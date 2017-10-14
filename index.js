@@ -8,7 +8,7 @@ var bodyParser  = require('body-parser');
 
 /* JSON WebToken Depedencies */
 var expressJWT  = require('express-jwt');
-var jwt         = require('jsonwebtoken');
+// var jwt         = require('jsonwebtoken');
 var secret      = process.env.JWT_SECRET;
 
 

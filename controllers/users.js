@@ -19,26 +19,25 @@ router.post('/login', function(req, res) {
   .findOne(sqlParams)
   .then(
     function(user) {
-      console.log('USER********* ', user.authenticated);
 
       // returns 401 if error or not a user
       if (!user) {
         return res.status(401).send({ message: 'User Not Found'});
       }
+      
       // check provided pw against db pw
-      // var authenticated = user._modelOptions.instanceMethods.authenticated(req.body.password)
       var authenticated = user.authenticated(req.body.password);
       console.log('authenticated', authenticated)
+      
       // returns 401 if err or bad pw
       if (!authenticated) {
         return status(401).send({message: 'User not authenticated'});
       }
       //all checks cleared, creates new JWT token
       var token = jwt.sign(user.toJSON(), secret);
+      
       //returns user data & token
       return res.send({ user: user, token: token})
-
-      // console.log('success in login route: ', user);
     },
     function(err) {
       console.log('error in login route:' ,err)
