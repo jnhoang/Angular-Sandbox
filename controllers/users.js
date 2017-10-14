@@ -1,7 +1,7 @@
 var express   = require('express');
 var database  = require('../models');
 var secret    = process.env.JWT_SECRET;
-
+var jwt = require('jsonwebtoken');
 var router    = express.Router();
 
 
@@ -13,18 +13,39 @@ router.post('/login', function(req, res) {
       username: req.body.username
     }
   };
-
+  console.log('REQ.BODY:', req.body)
   database
   .user
   .findOne(sqlParams)
   .then(
-    function success(user) {
-      console.log('success in login route: ', user);
-      res.send(user);
+    function(user) {
+      console.log('USER********* ', user.authenticated);
+
+      // returns 401 if error or not a user
+      if (!user) {
+        return res.status(401).send({ message: 'User Not Found'});
+      }
+      // check provided pw against db pw
+      // var authenticated = user._modelOptions.instanceMethods.authenticated(req.body.password)
+      var authenticated = user.authenticated(req.body.password);
+      console.log('authenticated', authenticated)
+      // returns 401 if err or bad pw
+      if (!authenticated) {
+        return status(401).send({message: 'User not authenticated'});
+      }
+      //all checks cleared, creates new JWT token
+      var token = jwt.sign(user.toJSON(), secret);
+      //returns user data & token
+      return res.send({ user: user, token: token})
+
+      // console.log('success in login route: ', user);
     },
-    function error(err) {
+    function(err) {
       console.log('error in login route:' ,err)
-      res.send(err);
+      res.status(401).send({
+        message   : 'There was an unknown error',
+        data      : err
+      });
     }
   )
 });
@@ -92,7 +113,7 @@ router.post('/signup', function(req, res) {
     // returns [ { user }, bool ]
     
     userArr[1] === false 
-    ? res.send({ errorMsg: 'Username already exists' })
+    ? res.send({ message: 'Username already exists' })
     : res.send(userArr[0]);
   })
   .catch(function(error) {

@@ -53,12 +53,14 @@ angular
     function getAuthStatus() {
       return user.info;
     }
+    function getBaseStr() {
+      return baseStrName;
+    }
     function getUserRole() {
       return user.info.userRole;
     }
     function login(userObj) {
-      $http
-      .post('/api/auth', userObj)
+      return $http.post('/api/users/login', userObj);
       
     }
     // function login(username, password) {
@@ -105,7 +107,7 @@ angular
   function($window) {
     return {
       request: function(config) {
-        var token = $window.localStorage['secretToken'];
+        var token = $window.localStorage['AngularSandbox.secretToken'];
 
         if (token) {
           config.headers.Authorization = 'Bearer ' + token;
