@@ -90,7 +90,10 @@ router.post('/signup', function(req, res) {
   .findOrCreate(sqlParams)
   .then(function(userArr) {
     // returns [ { user }, bool ]
-    res.send(userArr);
+    
+    userArr[1] === false 
+    ? res.send({ errorMsg: 'Username already exists' })
+    : res.send(userArr[0]);
   })
   .catch(function(error) {
     console.log('error in /signup route: ', error);

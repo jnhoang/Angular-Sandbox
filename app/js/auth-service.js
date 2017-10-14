@@ -6,7 +6,8 @@ angular
   '$window',
   '$location',
   function($http, $q, $window, $location) {
-    var baseUrl = '';
+    var baseUrl       = '';
+    var baseStrName   = 'AngularSandbox';
     var user;
     // var userInfo = {
     //   email            : null
@@ -21,6 +22,8 @@ angular
     return {
       authorize       : authorize,
       getAuthStatus   : getAuthStatus,
+      getBaseStr      : getBaseStr,
+      getToken        : getToken,
       getUserRole     : getUserRole,
       login           : login,
       logout          : logout
@@ -44,6 +47,9 @@ angular
 
       return false;
     }
+    function getToken() {
+      return $window.localStorage['secretToken'];
+    }
     function getAuthStatus() {
       return user.info;
     }
@@ -53,9 +59,7 @@ angular
     function login(userObj) {
       $http
       .post('/api/auth', userObj)
-      .then(function success(data) {
-        console.log(data)
-      })
+      
     }
     // function login(username, password) {
     //   var deferred = $q.defer();
@@ -87,17 +91,21 @@ angular
     // }
     function logout() {
       user.info = null;
-      $window.sessionStorage['userInfo'] = null;
+      $window.sessionStorage['angularSandboxUserInfo'] = null;
       return user.info;
     }
   }
 ])
+
+
+
+
 .factory('AuthInterceptor', [
-  'AuthFactory'
-  function(AuthFactory) {
+  '$window',
+  function($window) {
     return {
       request: function(config) {
-        var token = AuthFactory.getToken();
+        var token = $window.localStorage['secretToken'];
 
         if (token) {
           config.headers.Authorization = 'Bearer ' + token;
@@ -109,7 +117,7 @@ angular
   }
 ])
 .config([
-  'httpProvider',
+  '$httpProvider',
   function($httpProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');
   }
