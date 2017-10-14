@@ -9,13 +9,13 @@ angular
     var baseUrl = '';
     var user;
     // var userInfo = {
-    //   email: null
-    //   fname: null
-    //   lname: null
-    //   sqlKey: null
-    //   pwResetRequired: null
-    //   resetRequired: null
-    //   userRoae: null
+    //   email            : null
+    //   fname            : null
+    //   lname            : null
+    //   sqlKey           : null
+    //   pwResetRequired  : null
+    //   resetRequired    : null
+    //   userRole         : null
     // }
 
     return {
@@ -36,7 +36,8 @@ angular
       if (user.info !== undefined) {
         if (requiredRole === 'Admin' && user.info.userRole === 'Admin') {
           return true;
-        } else if (requiredRole === 'User' && (user.info.userRole === 'Admin' || user.info.userRole === 'User')) {
+        } 
+        else if (requiredRole === 'User' && (user.info.userRole === 'Admin' || user.info.userRole === 'User')) {
           return true;
         }
       }
@@ -49,37 +50,67 @@ angular
     function getUserRole() {
       return user.info.userRole;
     }
-    function login(username, password) {
-      var deferred = $q.defer();
-
-      var endpoint = '';
-      var url = baseUrl + endpoint;
-      var hash = btoa(username + ':' + password);
-      var credentials = {
-        email: username,
-        pw: hash
-      }
-
+    function login(userObj) {
       $http
-      .post(url, credentials)
+      .post('/api/auth', userObj)
       .then(function success(data) {
-        if (result.data.statusCode === 200) {
-          userInfo = result.data.data[0];
-          $window.sessionStorage['userInfo'] = JSON.stringify(user.info);
-
-          deferred.resolve(user.info);
-        } else {
-          deffered.reject(data);
-        }
-      })
-      .catch(function error(err) {
-        console.log('error in AuthService.login() :', err);
-        deffered.reject(err);
+        console.log(data)
       })
     }
+    // function login(username, password) {
+    //   var deferred = $q.defer();
+
+    //   var endpoint = '';
+    //   var url = baseUrl + endpoint;
+    //   var hash = btoa(username + ':' + password);
+    //   var credentials = {
+    //     email   : username,
+    //     pw      : hash
+    //   }
+
+    //   $http
+    //   .post(url, credentials)
+    //   .then(function success(data) {
+    //     if (result.data.statusCode === 200) {
+    //       userInfo = result.data.data[0];
+    //       $window.sessionStorage['userInfo'] = JSON.stringify(user.info);
+
+    //       deferred.resolve(user.info);
+    //     } else {
+    //       deffered.reject(data);
+    //     }
+    //   })
+    //   .catch(function error(err) {
+    //     console.log('error in AuthService.login() :', err);
+    //     deffered.reject(err);
+    //   })
+    // }
     function logout() {
       user.info = null;
       $window.sessionStorage['userInfo'] = null;
       return user.info;
     }
-  }])
+  }
+])
+.factory('AuthInterceptor', [
+  'AuthFactory'
+  function(AuthFactory) {
+    return {
+      request: function(config) {
+        var token = AuthFactory.getToken();
+
+        if (token) {
+          config.headers.Authorization = 'Bearer ' + token;
+        }
+
+        return config;
+      }
+    }
+  }
+])
+.config([
+  'httpProvider',
+  function($httpProvider) {
+    $httpProvider.interceptors.push('AuthInterceptor');
+  }
+])
