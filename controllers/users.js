@@ -1,15 +1,37 @@
 var express   = require('express');
 var database  = require('../models');
+var secret    = process.env.JWT_SECRET;
 
 var router    = express.Router();
 
 
+/* LOG IN */
+// If Authenticated, returns a signed JWT
+router.post('/login', function(req, res) {
+  var sqlParams = {
+    where: {
+      username: req.body.username
+    }
+  };
 
+  database
+  .user
+  .findOne(sqlParams)
+  .then(
+    function success(user) {
+      console.log('success in login route: ', user);
+      res.send(user);
+    },
+    function error(err) {
+      console.log('error in login route:' ,err)
+      res.send(err);
+    }
+  )
+});
 
 
 /* GET ALL USERS */
 router.get('/allUsers', function(req, res) {
-
   database
   .user
   .findAll()

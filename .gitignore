@@ -31,3 +31,5 @@ bower_components/
 *.css.map
 build/
 dist/
+
+.env

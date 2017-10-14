@@ -18,9 +18,13 @@
   },
   "homepage": "https://github.com/jnhustin/Angular-Sandbox#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "express-jwt": "^5.3.0",
     "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.1.0",
     "node": "0.0.0",
     "path": "^0.12.7",
     "pg": "^6.4.1",
