@@ -6,10 +6,10 @@ angular
   '$window',
   '$location',
   function($http, $q, $window, $location) {
-    var baseUrl       = '';
+    var baseUrl;
     var baseStrName   = 'AngularSandbox';
     var user;
-    // var user = {
+    // user = {
     //   email            : null
     //   fname            : null
     //   lname            : null
@@ -24,26 +24,28 @@ angular
     return {
       authorize       : authorize,
       getAuthStatus   : getAuthStatus,
-      getBaseStr      : getBaseStr,
+      // getBaseStr      : getBaseStr,
       getToken        : getToken,
-      getUserRole     : getUserRole,
       login           : login,
       logout          : logout,
       saveJWTToken    : saveJWTToken,
       saveUser        : saveUser
     }
+    
     function init() {
-      if ($window.localStorage['user']) {
-        user = JSON.parse($window.localStorage['user']);
+      if ($window.localStorage['AngularSandbox.user']) {
+        user = JSON.parse($window.localStorage['AngularSandbox.user']);
       }
+      console.log('user in auth service: ', user);
     }
 
     function authorize(requiredRole) {
-      if (user.info !== undefined) {
-        if (requiredRole === 'Admin' && user.info.userRole === 'Admin') {
+      if (user !== undefined) {
+        if (requiredRole === 'Admin' && user.userRole === 'Admin') {
           return true;
         } 
-        else if (requiredRole === 'User' && (user.info.userRole === 'Admin' || user.info.userRole === 'User')) {
+        
+        else if (requiredRole === 'User' && (user.userRole === 'Admin' || user.userRole === 'User')) {
           return true;
         }
       }
@@ -51,30 +53,28 @@ angular
       return false;
     }
     function getAuthStatus() {
-      return user.info;
+      return user;
     }
-    function getBaseStr() {
-      return baseStrName;
-    }
+    // function getBaseStr() {
+    //   return baseStrName;
+    // }
     function getToken() {
       return $window.localStorage['secretToken'];
     }
-    function getUserRole() {
-      return user.info.userRole;
-    }
     function login(loginObj) {
       return $http.post('/api/users/login', loginObj);
+    }
+    function logout() {
+      user = null;
+      $window.localStorage['AngularSandbox.user'] = null;
+      return user;
     }
     function saveJWTToken(token) {
       $window.localStorage['AngularSandbox.secretToken'] = token;
     }
     function saveUser(userObj) {
+      user = userObj;
       $window.localStorage['AngularSandbox.user'] = JSON.stringify(userObj);
-    }
-    function logout() {
-      user.info = null;
-      $window.localStorage['AngularSandbox.user'] = null;
-      return user.info;
     }
   }
 ])
