@@ -28,6 +28,11 @@ angular
       templateUrl  : 'components/admin/admin.html',
       controller   : 'AdminCtrl'
     })
+    .state('Reset', {
+      url          : '/reset',
+      templateUrl  : 'components/reset/reset.html',
+      controller   : 'ResetCtrl'
+    })
 
     $locationProvider.html5Mode(true);
 

@@ -4,54 +4,53 @@ angular
   '$scope',
   '$window',
   '$location',
+  '$state',
   'AuthService',
   // 'AlertService',
   'NavService',
-  function($scope, $window, $location, AuthService/*, AlertService*/, NavService) {
+  function($scope, $window, $location, $state, AuthService/*, AlertService*/, NavService) {
     
     $scope.user;
 
 
     $scope.login  = login;
     $scope.logout = logout;
+    
+
     init();
 
-    //   $scope.displayMenuItems = true;
 
-    //   $scope.currentUser.pwResetRequired = userData.pw_reset_required === 'Y' ? true : false;
-    //   $scope.currentUser.resetRequired   = userData.reset_required    === 'Y' ? true : false;
+    // $scope.displayMenuItems = true;
 
-    $scope.$watch(AuthService.getAuthStatus, function(authStatus) {
-      if(authStatus !== undefined) {
-        var user = AuthService.getAuthStatus();
-        setCurrentUser(user);
-        console.log('watching nav!')
-      }
-    });
+    // $scope.currentUser.pwResetRequired = userData.pw_reset_required === 'Y' ? true : false;
+    // $scope.currentUser.resetRequired   = userData.reset_required    === 'Y' ? true : false;
+
 
     function init() {
-      console.log('init called!')
       $scope.user = AuthService.getAuthStatus();
-      if ($scope.user != null) {
-        console.log('user: ', $scope.user.username)
+
+      if ($scope.user) {
+        if ($scope.user.password_reset_required || $scope.user.security_reset_required) {
+          $state.go('Reset')
+        }
       }
     }
 
     // function isActive(viewLocation) {
     //   return viewLocation === $location.path();
     // }
-    function alertAdd(message, type) {
+    // function alertAdd(message, type) {
 
-    }
+    // }
     
-    function alertDelete(index) {
-      AlertService.deleteAlert(index);
-      $scope.alerts = AlertService.getAlerts();
-    }
-    function alertClear() {
-      AlertService.clearAlerts();
-      $scope.alerts = AlertService.getAlerts();
-    }
+    // function alertDelete(index) {
+    //   AlertService.deleteAlert(index);
+    //   $scope.alerts = AlertService.getAlerts();
+    // }
+    // function alertClear() {
+    //   AlertService.clearAlerts();
+    //   $scope.alerts = AlertService.getAlerts();
+    // }
     function login() {
       var loginData = {
       username: 'tulp',
@@ -74,10 +73,6 @@ angular
       AuthService.logout();
       init();
     }
-    function setCurrentUser(userData) {
-      console.log('nav has user!')
-      console.log('nav\'s user: ',$scope.user)
-      }
    
 
  

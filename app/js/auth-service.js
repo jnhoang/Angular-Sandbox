@@ -66,7 +66,7 @@ angular
     }
     function logout() {
       user = null;
-      $window.localStorage['AngularSandbox.user'] = null;
+      $window.localStorage.removeItem('AngularSandbox.user');
       return user;
     }
     function saveJWTToken(token) {
